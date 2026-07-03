@@ -1,0 +1,50 @@
+---
+title: "Essay: Understanding Shiny Apps"
+---
+
+## What is a Shiny App?
+
+Shiny is an R package that lets you build interactive web applications directly from R code — no need to know HTML, CSS, or JavaScript. If you can write R, you can build a working web app. This is especially useful for anyone doing data analysis who wants to let others explore that data themselves, rather than just handing over a static report.
+
+## The Two Core Pieces: UI and Server
+
+Every Shiny app is built from two main components:
+
+**1. UI (User Interface)** This defines what the user sees — the layout, buttons, dropdowns, sliders, text boxes, and where outputs like plots or tables appear.
+
+**2. Server** This defines what happens behind the scenes — the logic that takes user input, processes it, and generates the outputs shown in the UI.
+
+A simple example looks like this:
+
+``` r
+library(shiny)
+
+ui <- fluidPage(
+  sliderInput("num", "Choose a number:", min = 1, max = 100, value = 50),
+  textOutput("result")
+)
+
+server <- function(input, output) {
+  output$result <- renderText({
+    paste("You selected:", input$num)
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Reactivity: The Heart of Shiny
+
+What makes Shiny powerful is **reactivity** — when a user changes an input (like moving a slider), Shiny automatically re-runs only the parts of the code that depend on that input, and updates the output in real time. You don't have to manually refresh anything; it just works.
+
+## Why This Matters
+
+Shiny apps are ideal when you want to:
+
+-   Let non-technical stakeholders explore data themselves
+-   Build internal tools without needing a full web development team
+-   Turn a one-time analysis into something reusable and interactive
+
+## Requirement: A Running Server
+
+One important thing to understand about traditional Shiny apps: they need to run on a server. That means someone (you, your IT team, or a hosting service like shinyapps.io) has to keep an R process running in the background to power the app. This is important context for understanding Shinylive, covered in the next essay, which solves this exact limitation.

@@ -1,0 +1,81 @@
+---
+title: "Employee Shift Dashboard"
+format: dashboard
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+
+df <- read.csv("data/employee_hours.csv")
+```
+
+## Row
+
+```{r}
+#| content: valuebox
+#| title: "Total Employees"
+list(
+  icon = "people-fill",
+  color = "primary",
+  value = n_distinct(df$Employee)
+)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Total Hours Worked"
+list(
+  icon = "clock-fill",
+  color = "success",
+  value = sum(df$Hours_Worked)
+)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Avg Break (min)"
+list(
+  icon = "cup-hot-fill",
+  color = "warning",
+  value = round(mean(df$Break_Minutes), 1)
+)
+```
+
+## Row
+
+### Column
+
+```{r}
+#| title: "Hours Worked by Employee"
+ggplot(df, aes(x = reorder(Employee, Hours_Worked), y = Hours_Worked, fill = Department)) +
+  geom_col() +
+  coord_flip() +
+  labs(x = "Employee", y = "Hours Worked") +
+  theme_minimal()
+```
+
+### Column
+
+```{r}
+#| title: "Hours by Department"
+df |>
+  group_by(Department) |>
+  summarise(Total_Hours = sum(Hours_Worked)) |>
+  ggplot(aes(x = reorder(Department, Total_Hours), y = Total_Hours, fill = Department)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(x = "Department", y = "Total Hours") +
+  theme_minimal()
+```
+
+## Row
+
+```{r}
+#| title: "Shift Details"
+df |>
+  select(Employee, Department, Date, Start_Time, End_Time, Break_Minutes, Hours_Worked) |>
+  DT::datatable()
+```
+
+------------------------------------------------------------------------

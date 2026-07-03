@@ -1,0 +1,20 @@
+project:
+  type: website
+
+website:
+  title: "Thomas Prata"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: dashboard.qmd
+        text: Dashboard
+      - href: shiny-essay.qmd
+        text: "Essay: Shiny Apps"
+      - href: shinylive-essay.qmd
+        text: "Essay: Shinylive"
+
+format:
+  html:
+    theme: cosmo
+    toc: true

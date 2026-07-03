@@ -1,0 +1,34 @@
+---
+title: "Essay: Understanding Shinylive"
+---
+
+## What is Shinylive?
+
+Shinylive is a way to run Shiny apps entirely in a web browser, without needing a dedicated R server running in the background. It works by compiling R (or Python) into WebAssembly, a technology that lets code run directly inside the browser itself. In simple terms: the "server" logic that used to live on a remote machine now runs right on the visitor's own computer, inside their browser tab.
+
+## How It Differs From Traditional Shiny
+
+|   | Traditional Shiny | Shinylive |
+|------------------------|------------------------|------------------------|
+| **Where it runs** | On a server (needs to stay running) | In the user's browser (no server needed) |
+| **Hosting** | Requires a server or service like shinyapps.io | Can be hosted as static files (e.g., GitHub Pages) |
+| **Cost** | Ongoing server costs | Free to host as static files |
+| **Startup time** | Usually fast | Slower first load (browser downloads R/Python runtime) |
+| **Package support** | Full access to any R package | Limited to packages compatible with WebAssembly |
+| **Scalability** | Server can get overwhelmed with many users | Scales naturally since each user runs their own copy |
+
+## Pros of Shinylive
+
+-   **No server required** — eliminates hosting costs and maintenance
+-   **Easy to share** — can be hosted anywhere static files are supported, including GitHub Pages
+-   **Scales effortlessly** — since each visitor's browser does the work, there's no risk of the app slowing down under heavy traffic
+
+## Cons of Shinylive
+
+-   **Slower initial load** — the browser has to download the R (or Python) runtime environment before the app starts
+-   **Limited package support** — not every R package works in this browser-based environment yet
+-   **Less suited for heavy computation** — since it runs on the visitor's device, very data-intensive apps may perform worse than on a dedicated server
+
+## When to Use Each
+
+Traditional Shiny is still the better choice for apps that need heavy computation, access to a database, or use packages not yet supported in WebAssembly. Shinylive shines for lightweight, shareable tools you want to distribute freely without worrying about hosting infrastructure — a perfect fit for a public-facing demo or a free educational tool.
