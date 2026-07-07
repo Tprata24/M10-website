@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "shiny-essay.html",
+    "href": "shiny-essay.html",
+    "title": "Essay: Understanding Shiny Apps",
+    "section": "",
+    "text": "Shiny is an R package that lets you build interactive web applications directly from R code — no need to know HTML, CSS, or JavaScript. If you can write R, you can build a working web app. This is especially useful for anyone doing data analysis who wants to let others explore that data themselves, rather than just handing over a static report."
+  },
+  {
+    "objectID": "shiny-essay.html#what-is-a-shiny-app",
+    "href": "shiny-essay.html#what-is-a-shiny-app",
+    "title": "Essay: Understanding Shiny Apps",
+    "section": "",
+    "text": "Shiny is an R package that lets you build interactive web applications directly from R code — no need to know HTML, CSS, or JavaScript. If you can write R, you can build a working web app. This is especially useful for anyone doing data analysis who wants to let others explore that data themselves, rather than just handing over a static report."
+  },
+  {
+    "objectID": "shiny-essay.html#the-two-core-pieces-ui-and-server",
+    "href": "shiny-essay.html#the-two-core-pieces-ui-and-server",
+    "title": "Essay: Understanding Shiny Apps",
+    "section": "The Two Core Pieces: UI and Server",
+    "text": "The Two Core Pieces: UI and Server\nEvery Shiny app is built from two main components:\n1. UI (User Interface) This defines what the user sees — the layout, buttons, dropdowns, sliders, text boxes, and where outputs like plots or tables appear.\n2. Server This defines what happens behind the scenes — the logic that takes user input, processes it, and generates the outputs shown in the UI.\nA simple example looks like this:\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  sliderInput(\"num\", \"Choose a number:\", min = 1, max = 100, value = 50),\n  textOutput(\"result\")\n)\n\nserver &lt;- function(input, output) {\n  output$result &lt;- renderText({\n    paste(\"You selected:\", input$num)\n  })\n}\n\nshinyApp(ui = ui, server = server)"
+  },
+  {
+    "objectID": "shiny-essay.html#reactivity-the-heart-of-shiny",
+    "href": "shiny-essay.html#reactivity-the-heart-of-shiny",
+    "title": "Essay: Understanding Shiny Apps",
+    "section": "Reactivity: The Heart of Shiny",
+    "text": "Reactivity: The Heart of Shiny\nWhat makes Shiny powerful is reactivity — when a user changes an input (like moving a slider), Shiny automatically re-runs only the parts of the code that depend on that input, and updates the output in real time. You don’t have to manually refresh anything; it just works."
+  },
+  {
+    "objectID": "shiny-essay.html#why-this-matters",
+    "href": "shiny-essay.html#why-this-matters",
+    "title": "Essay: Understanding Shiny Apps",
+    "section": "Why This Matters",
+    "text": "Why This Matters\nShiny apps are ideal when you want to:\n\nLet non-technical stakeholders explore data themselves\nBuild internal tools without needing a full web development team\nTurn a one-time analysis into something reusable and interactive"
+  },
+  {
+    "objectID": "shiny-essay.html#requirement-a-running-server",
+    "href": "shiny-essay.html#requirement-a-running-server",
+    "title": "Essay: Understanding Shiny Apps",
+    "section": "Requirement: A Running Server",
+    "text": "Requirement: A Running Server\nOne important thing to understand about traditional Shiny apps: they need to run on a server. That means someone (you, your IT team, or a hosting service like shinyapps.io) has to keep an R process running in the background to power the app. This is important context for understanding Shinylive, covered in the next essay, which solves this exact limitation."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "M10",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "shinylive-essay.html",
+    "href": "shinylive-essay.html",
+    "title": "Essay: Understanding Shinylive",
+    "section": "",
+    "text": "Shinylive is a way to run Shiny apps entirely in a web browser, without needing a dedicated R server running in the background. It works by compiling R (or Python) into WebAssembly, a technology that lets code run directly inside the browser itself. In simple terms: the “server” logic that used to live on a remote machine now runs right on the visitor’s own computer, inside their browser tab."
+  },
+  {
+    "objectID": "shinylive-essay.html#what-is-shinylive",
+    "href": "shinylive-essay.html#what-is-shinylive",
+    "title": "Essay: Understanding Shinylive",
+    "section": "",
+    "text": "Shinylive is a way to run Shiny apps entirely in a web browser, without needing a dedicated R server running in the background. It works by compiling R (or Python) into WebAssembly, a technology that lets code run directly inside the browser itself. In simple terms: the “server” logic that used to live on a remote machine now runs right on the visitor’s own computer, inside their browser tab."
+  },
+  {
+    "objectID": "shinylive-essay.html#how-it-differs-from-traditional-shiny",
+    "href": "shinylive-essay.html#how-it-differs-from-traditional-shiny",
+    "title": "Essay: Understanding Shinylive",
+    "section": "How It Differs From Traditional Shiny",
+    "text": "How It Differs From Traditional Shiny\n\n\n\n\n\n\n\n\n\nTraditional Shiny\nShinylive\n\n\n\n\nWhere it runs\nOn a server (needs to stay running)\nIn the user’s browser (no server needed)\n\n\nHosting\nRequires a server or service like shinyapps.io\nCan be hosted as static files (e.g., GitHub Pages)\n\n\nCost\nOngoing server costs\nFree to host as static files\n\n\nStartup time\nUsually fast\nSlower first load (browser downloads R/Python runtime)\n\n\nPackage support\nFull access to any R package\nLimited to packages compatible with WebAssembly\n\n\nScalability\nServer can get overwhelmed with many users\nScales naturally since each user runs their own copy"
+  },
+  {
+    "objectID": "shinylive-essay.html#pros-of-shinylive",
+    "href": "shinylive-essay.html#pros-of-shinylive",
+    "title": "Essay: Understanding Shinylive",
+    "section": "Pros of Shinylive",
+    "text": "Pros of Shinylive\n\nNo server required — eliminates hosting costs and maintenance\nEasy to share — can be hosted anywhere static files are supported, including GitHub Pages\nScales effortlessly — since each visitor’s browser does the work, there’s no risk of the app slowing down under heavy traffic"
+  },
+  {
+    "objectID": "shinylive-essay.html#cons-of-shinylive",
+    "href": "shinylive-essay.html#cons-of-shinylive",
+    "title": "Essay: Understanding Shinylive",
+    "section": "Cons of Shinylive",
+    "text": "Cons of Shinylive\n\nSlower initial load — the browser has to download the R (or Python) runtime environment before the app starts\nLimited package support — not every R package works in this browser-based environment yet\nLess suited for heavy computation — since it runs on the visitor’s device, very data-intensive apps may perform worse than on a dedicated server"
+  },
+  {
+    "objectID": "shinylive-essay.html#when-to-use-each",
+    "href": "shinylive-essay.html#when-to-use-each",
+    "title": "Essay: Understanding Shinylive",
+    "section": "When to Use Each",
+    "text": "When to Use Each\nTraditional Shiny is still the better choice for apps that need heavy computation, access to a database, or use packages not yet supported in WebAssembly. Shinylive shines for lightweight, shareable tools you want to distribute freely without worrying about hosting infrastructure — a perfect fit for a public-facing demo or a free educational tool."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  }
+]
